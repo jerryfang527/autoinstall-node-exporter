@@ -104,7 +104,7 @@ check_existing_file() {
     if [[ -f "${FILENAME}.tar.gz" ]]; then
         log_info "发现已下载的文件: ${FILENAME}.tar.gz"
         echo -n "是否重新下载？(y/N): "
-        read -r REDOWNLOAD
+        read -r REDOWNLOAD </dev/tty
         if [[ $REDOWNLOAD =~ ^[Yy]$ ]]; then
             rm -f "${FILENAME}.tar.gz"
             NEED_DOWNLOAD=true
@@ -118,7 +118,7 @@ check_existing_file() {
     if [[ -d "$FILENAME" ]]; then
         log_info "发现已解压的目录: $FILENAME"
         echo -n "是否重新解压？(y/N): "
-        read -r REEXTRACT
+        read -r REEXTRACT </dev/tty
         if [[ $REEXTRACT =~ ^[Yy]$ ]]; then
             rm -rf "$FILENAME"
             NEED_EXTRACT=true
@@ -352,7 +352,7 @@ cleanup() {
     log_step "清理临时文件..."
     
     echo -n "是否删除下载的临时文件？(Y/n): "
-    read -r CLEANUP_CHOICE
+    read -r CLEANUP_CHOICE </dev/tty
     
     if [[ ! $CLEANUP_CHOICE =~ ^[Nn]$ ]]; then
         cd /tmp
